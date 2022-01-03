@@ -1,0 +1,527 @@
+###############################################################################
+#
+# IAR ELF Linker V4.21.1.2409/W32 for RL78                03/Jan/2022  15:08:01
+# Copyright 2011-2021 IAR Systems AB.
+#
+#    Output file  =
+#        E:\ibrahim\Github_ibrahim\Renesas RL78_G14\Renesas-RL78\Input
+#        Output\Debug\Exe\Input_Output.out
+#    Map file     =
+#        E:\ibrahim\Github_ibrahim\Renesas RL78_G14\Renesas-RL78\Input
+#        Output\Debug\List\Input_Output.map
+#    Command line =
+#        -f C:\Users\BRAHIM~1.BOU\AppData\Local\Temp\EW1A11.tmp
+#        ("E:\ibrahim\Github_ibrahim\Renesas RL78_G14\Renesas-RL78\Input
+#        Output\Debug\Obj\r_cg_cgc.o" "E:\ibrahim\Github_ibrahim\Renesas
+#        RL78_G14\Renesas-RL78\Input Output\Debug\Obj\r_cg_cgc_user.o"
+#        "E:\ibrahim\Github_ibrahim\Renesas RL78_G14\Renesas-RL78\Input
+#        Output\Debug\Obj\r_cg_intc.o" "E:\ibrahim\Github_ibrahim\Renesas
+#        RL78_G14\Renesas-RL78\Input Output\Debug\Obj\r_cg_intc_user.o"
+#        "E:\ibrahim\Github_ibrahim\Renesas RL78_G14\Renesas-RL78\Input
+#        Output\Debug\Obj\r_cg_port.o" "E:\ibrahim\Github_ibrahim\Renesas
+#        RL78_G14\Renesas-RL78\Input Output\Debug\Obj\r_cg_port_user.o"
+#        "E:\ibrahim\Github_ibrahim\Renesas RL78_G14\Renesas-RL78\Input
+#        Output\Debug\Obj\r_cg_timer.o" "E:\ibrahim\Github_ibrahim\Renesas
+#        RL78_G14\Renesas-RL78\Input Output\Debug\Obj\r_cg_timer_user.o"
+#        "E:\ibrahim\Github_ibrahim\Renesas RL78_G14\Renesas-RL78\Input
+#        Output\Debug\Obj\r_cg_wdt.o" "E:\ibrahim\Github_ibrahim\Renesas
+#        RL78_G14\Renesas-RL78\Input Output\Debug\Obj\r_cg_wdt_user.o"
+#        "E:\ibrahim\Github_ibrahim\Renesas RL78_G14\Renesas-RL78\Input
+#        Output\Debug\Obj\r_main.o" "E:\ibrahim\Github_ibrahim\Renesas
+#        RL78_G14\Renesas-RL78\Input Output\Debug\Obj\r_systeminit.o"
+#        --no_out_extension -o "E:\ibrahim\Github_ibrahim\Renesas
+#        RL78_G14\Renesas-RL78\Input Output\Debug\Exe\Input_Output.out"
+#        --config_def __RESERVE_OCD_ROM=1 --config_def
+#        __RESERVE_OCD_TRACE_RAM=0 --config_def __RESERVE_HOTPLUGIN_RAM=0 --map
+#        "E:\ibrahim\Github_ibrahim\Renesas RL78_G14\Renesas-RL78\Input
+#        Output\Debug\List\Input_Output.map" --config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench 8.5\rl78\config\lnkr5f104pj.icf"
+#        --config_def _STACK_SIZE=128 --config_def _NEAR_HEAP_SIZE=256
+#        --config_def _FAR_HEAP_SIZE=4096 --config_def _HUGE_HEAP_SIZE=0
+#        --define_symbol _NEAR_CONST_LOCATION=0 --config_def
+#        _NEAR_CONST_LOCATION_START=0x3000 --config_def
+#        _NEAR_CONST_LOCATION_SIZE=0x6F00 --vfe --entry __iar_program_start
+#        --debug_lib --text_out locale)
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+__SystemLibrary            = DLib
+__calling_convention       = v2
+__code_model               = near
+__core                     = s3
+__data_model               = near
+__dlib_full_locale_support = 0
+__dlib_version             = 6
+__double_size              = 32
+__far_rt_calls             = false
+__near_const               = rom0
+__rt_version               = 2
+
+
+*******************************************************************************
+*** RESERVED RANGES
+***
+
+Ranges reserved by mirroring and reserve directives:
+
+      From        To    Size
+      ----        --    ----
+  0x3'fe00  0x3'ffff   0x200
+  0xf'3000  0xf'9eff  0x6f00
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"RESET":
+       place at address 0x0 { ro section .reset };
+"VECTOR":
+       place at address 0x4 { ro section .intvec };
+define block OPT_BYTE
+   with size = 4 { R_OPT_BYTE, ro section .option_byte, ro section OPTBYTE };
+"A2":  place at address 0xc0 { block OPT_BYTE };
+define block SECUR_ID
+   with size = 10 { R_SECUR_ID, ro section .security_id, ro section SECUID };
+"A3":  place at address 0xc4 { block SECUR_ID };
+"ROMNEAR":
+       place in [from 0xd8 to 0xffff] { R_TEXT, ro section .text };
+define block INIT_ARRAY
+   with fixed order, alignment = 2 {
+      ro section .preinit_array, ro section .init_array };
+define block INIT_ARRAY_TLS
+   with fixed order, alignment = 2 {
+      ro section .preinit_array_tls, ro section .init_array_tls };
+"ROMFAR":
+       place in [from 0xd8 to 0xffff] |
+                [from 0x1'0000 to 0x1'ffff repeat 3] {
+          block INIT_ARRAY, block INIT_ARRAY_TLS, R_TEXTF_UNIT64KP,
+          ro section .textf_unit64kp, ro section .constf, ro section .switchf,
+          ro };
+"ROMHUGE":
+       place in [from 0xd8 to 0x3'ffff] {
+          ro section .consth, R_TEXTF, ro section .textf };
+define block NEAR_HEAP with size = 256, alignment = 2 { };
+define block CSTACK with size = 128, alignment = 2 { rw section CSTACK };
+"RAMNEAR":
+       place in [from 0xf'9f00 to 0xf'fe1f] {
+          block NEAR_HEAP, block CSTACK, zi section .iar.dynexit, R_DATA,
+          rw section .data, R_BSS, rw section .bss*, rw };
+"SADDRMEM":
+       place in [from 0xf'fe20 to 0xf'fedf] {
+          rw section .sdata, R_SDATA, rw section .sbss*, R_SBSS,
+          rw section .wrkseg };
+reserve region "OCD ROM area" = [from 0x3'fe00 to 0x3'ffff];
+
+No sections matched the following patterns:
+
+  R_BSS                          in "RAMNEAR"
+  R_BSSF                         in "RAMFAR"
+  R_CALLT0                       in "CALLT"
+  R_DATA                         in "RAMNEAR"
+  R_DATAF                        in "RAMFAR"
+  R_OPT_BYTE                     in block OPT_BYTE
+  R_SBSS                         in "SADDRMEM"
+  R_SDATA                        in "SADDRMEM"
+  R_SECUR_ID                     in block SECUR_ID
+  R_TEXT                         in "ROMNEAR"
+  R_TEXTF                        in "ROMHUGE"
+  R_TEXTF_UNIT64KP               in "ROMFAR"
+  ro R_CONST_init                in "MIRROR"
+  ro section .callt0             in "CALLT"
+  ro section .const              in "MIRROR"
+  ro section .constf             in "ROMFAR"
+  ro section .consth             in "ROMHUGE"
+  ro section .init_array         in block INIT_ARRAY
+  ro section .init_array_tls     in block INIT_ARRAY_TLS
+  ro section .option_byte        in block OPT_BYTE
+  ro section .preinit_array      in block INIT_ARRAY
+  ro section .preinit_array_tls  in block INIT_ARRAY_TLS
+  ro section .security_id        in block SECUR_ID
+  ro section .switch             in "MIRROR"
+  ro section .switchf            in "ROMFAR"
+  ro section .textf_unit64kp     in "ROMFAR"
+  rw section .bss_unit64kp       in "RAMFAR"
+  rw section .bssf*              in "RAMFAR"
+  rw section .data               in "RAMNEAR"
+  rw section .data_unit64kp      in "RAMFAR"
+  rw section .dataf              in "RAMFAR"
+  rw section .hbss*              in "RAMHUGE"
+  rw section .hdata              in "RAMHUGE"
+  rw section .sbss*              in "SADDRMEM"
+  rw section .sdata              in "SADDRMEM"
+  zi section .iar.dynexit        in "RAMNEAR"
+
+
+  Section          Kind      Address   Size  Object
+  -------          ----      -------   ----  ------
+"RESET":                                0x2
+  .reset           const         0x0    0x2  interrupt_vector.o [3]
+                               - 0x2    0x2
+
+"VECTOR":                              0x7c
+  .intvec          const         0x4   0x7c  interrupt_vector.o [3]
+                              - 0x80   0x7c
+
+"A2":                                   0x4
+  OPT_BYTE                      0xc0    0x4  <Block>
+    OPTBYTE        const        0xc0    0x1  r_main.o [1]
+    OPTBYTE        const        0xc1    0x1  r_main.o [1]
+    OPTBYTE        const        0xc2    0x1  r_main.o [1]
+    OPTBYTE        const        0xc3    0x1  r_main.o [1]
+                              - 0xc4    0x4
+
+"A3":                                   0xa
+  SECUR_ID                      0xc4    0xa  <Block>
+    SECUID         const        0xc4    0xa  r_main.o [1]
+                              - 0xce    0xa
+
+"ROMNEAR":                            0x2aa
+  .text            ro code      0xd8   0xe7  r_main.o [1]
+  .text            ro code     0x1bf   0x6c  r_cg_intc.o [1]
+  .text            ro code     0x22b   0x5c  r_cg_timer.o [1]
+  .text            ro code     0x287   0x3a  cstartup.o [3]
+  .text            ro code     0x2c1   0x27  r_systeminit.o [1]
+  .text            ro code     0x2e8   0x19  r_cg_timer_user.o [1]
+  .text            ro code     0x301   0x17  r_cg_cgc.o [1]
+  .text            ro code     0x318   0x13  default_handler.o [3]
+  .text            ro code     0x32b   0x12  r_cg_port.o [1]
+  .text            ro code     0x33d   0x11  __dbg_xxexit.o [2]
+  .text            ro code     0x34e   0x10  r_cg_wdt.o [1]
+  .text            ro code     0x35e    0xa  r_cg_intc_user.o [1]
+  .text            ro code     0x368    0xa  __dbg_abort.o [2]
+  .text            ro code     0x372    0x5  cexit.o [3]
+  .text            ro code     0x377    0x3  r_cg_cgc_user.o [1]
+  .text            ro code     0x37a    0x3  exit.o [3]
+  .text            ro code     0x37d    0x3  __dbg_break.o [2]
+  .text            ro code     0x380    0x2  r_cg_wdt_user.o [1]
+                             - 0x382  0x2aa
+
+"ROMFAR":                               0x8
+  .iar.init_table  const       0x382    0x8  - Linker created -
+                             - 0x38a    0x8
+
+"ROMHUGE":                             0x66
+  .textf           ro code     0x38a   0x41  data_init.o [3]
+  .textf           ro code     0x3cb   0x25  near_zero_init.o [3]
+                             - 0x3f0   0x66
+
+Absolute sections, part 1 of 20:        0x1
+  .bss.noinit      uninit   0xf'0034    0x1  r_cg_port.o [1]
+                          - 0xf'0035    0x1
+
+Absolute sections, part 2 of 20:        0x3
+  .bss.noinit      uninit   0xf'0077    0x1  r_systeminit.o [1]
+  .bss.noinit      uninit   0xf'0078    0x1  r_systeminit.o [1]
+  .bss.noinit      uninit   0xf'0079    0x1  r_systeminit.o [1]
+                          - 0xf'007a    0x3
+
+Absolute sections, part 3 of 20:        0x1
+  .bss.noinit      uninit   0xf'00f0    0x1  r_cg_timer.o [1]
+                          - 0xf'00f1    0x1
+
+Absolute sections, part 4 of 20:        0x1
+  .bss.noinit      uninit   0xf'00f3    0x1  r_cg_cgc.o [1]
+                          - 0xf'00f4    0x1
+
+Absolute sections, part 5 of 20:        0x2
+  .bss.noinit      uninit   0xf'0190    0x2  r_cg_timer.o [1]
+                          - 0xf'0192    0x2
+
+Absolute sections, part 6 of 20:        0xa
+  .bss.noinit      uninit   0xf'01b2    0x2  r_cg_timer.o [1]
+  .bss.noinit      uninit   0xf'01b4    0x2  r_cg_timer.o [1]
+  .bss.noinit      uninit   0xf'01b6    0x2  r_cg_timer.o [1]
+  .bss.noinit      uninit   0xf'01b8    0x2  r_cg_timer.o [1]
+  .bss.noinit      uninit   0xf'01ba    0x2  r_cg_timer.o [1]
+                          - 0xf'01bc    0xa
+
+"RAMNEAR", part 1 of 2:                0x80
+  CSTACK                    0xf'9f00   0x80  <Block>
+    CSTACK         rw data  0xf'9f00    0x0  cstartup.o [3]
+    CSTACK         uninit   0xf'9f00   0x80  <Block tail>
+                          - 0xf'9f80   0x80
+
+"RAMNEAR", part 2 of 2:                 0xf
+  .bss             zero     0xf'9f80    0x2  r_cg_timer_user.o [1]
+  .bss             zero     0xf'9f82    0x2  r_main.o [1]
+  .bss             zero     0xf'9f84    0x2  r_main.o [1]
+  .bss             zero     0xf'9f86    0x1  r_main.o [1]
+  .bss             zero     0xf'9f87    0x1  r_main.o [1]
+  .bss             zero     0xf'9f88    0x1  r_main.o [1]
+  .bss             zero     0xf'9f89    0x1  r_main.o [1]
+  .bss             zero     0xf'9f8a    0x1  r_main.o [1]
+  .bss             zero     0xf'9f8b    0x1  r_main.o [1]
+  .bss             zero     0xf'9f8c    0x1  r_main.o [1]
+  .bss             zero     0xf'9f8d    0x1  r_main.o [1]
+  .bss             zero     0xf'9f8e    0x1  r_main.o [1]
+                          - 0xf'9f8f    0xf
+
+"SADDRMEM":                             0x0
+  .wrkseg          rw data  0xf'fe20    0x0  cstartup.o [3]
+
+Absolute sections, part 7 of 20:        0x1
+  .sbss.noinit     uninit   0xf'ff04    0x1  r_main.o [1]
+                          - 0xf'ff05    0x1
+
+Absolute sections, part 8 of 20:        0x2
+  .sbss.noinit     uninit   0xf'ff06    0x1  r_main.o [1]
+  .sbss.noinit     uninit   0xf'ff07    0x1  r_main.o [1]
+                          - 0xf'ff08    0x2
+
+Absolute sections, part 9 of 20:        0x2
+  .sbss.noinit     uninit   0xf'ff18    0x2  r_cg_timer.o [1]
+                          - 0xf'ff1a    0x2
+
+Absolute sections, part 10 of 20:       0x1
+  .bss.noinit      uninit   0xf'ff24    0x1  r_cg_port.o [1]
+                          - 0xf'ff25    0x1
+
+Absolute sections, part 11 of 20:       0x2
+  .bss.noinit      uninit   0xf'ff26    0x1  r_cg_port.o [1]
+  .bss.noinit      uninit   0xf'ff27    0x1  r_cg_port.o [1]
+                          - 0xf'ff28    0x2
+
+Absolute sections, part 12 of 20:       0x1
+  .bss.noinit      uninit   0xf'ff3b    0x1  r_cg_intc.o [1]
+                          - 0xf'ff3c    0x1
+
+Absolute sections, part 13 of 20:       0x2
+  .bss.noinit      uninit   0xf'ffa0    0x1  r_cg_cgc.o [1]
+  .bss.noinit      uninit   0xf'ffa1    0x1  r_cg_cgc.o [1]
+                          - 0xf'ffa2    0x2
+
+Absolute sections, part 14 of 20:       0x1
+  .bss.noinit      uninit   0xf'ffa4    0x1  r_cg_cgc.o [1]
+                          - 0xf'ffa5    0x1
+
+Absolute sections, part 15 of 20:       0x1
+  .bss.noinit      uninit   0xf'ffa8    0x1  r_cg_cgc_user.o [1]
+                          - 0xf'ffa9    0x1
+
+Absolute sections, part 16 of 20:       0x2
+  .bss.noinit      uninit   0xf'ffd0    0x2  r_cg_intc.o [1]
+                          - 0xf'ffd2    0x2
+
+Absolute sections, part 17 of 20:       0x2
+  .bss.noinit      uninit   0xf'ffd4    0x2  r_cg_intc.o [1]
+                          - 0xf'ffd6    0x2
+
+Absolute sections, part 18 of 20:       0x2
+  .bss.noinit      uninit   0xf'ffd8    0x2  r_cg_intc.o [1]
+                          - 0xf'ffda    0x2
+
+Absolute sections, part 19 of 20:       0x2
+  .bss.noinit      uninit   0xf'ffdc    0x2  r_cg_intc.o [1]
+                          - 0xf'ffde    0x2
+
+Absolute sections, part 20 of 20:      0x10
+  .bss.noinit      uninit   0xf'ffe0    0x2  r_cg_wdt.o [1]
+  .bss.noinit      uninit   0xf'ffe2    0x2  r_cg_timer.o [1]
+  .bss.noinit      uninit   0xf'ffe4    0x2  r_cg_wdt.o [1]
+  .bss.noinit      uninit   0xf'ffe6    0x2  r_cg_timer.o [1]
+  .bss.noinit      uninit   0xf'ffe8    0x2  r_cg_wdt.o [1]
+  .bss.noinit      uninit   0xf'ffea    0x2  r_cg_timer.o [1]
+  .bss.noinit      uninit   0xf'ffec    0x2  r_cg_wdt.o [1]
+  .bss.noinit      uninit   0xf'ffee    0x2  r_cg_timer.o [1]
+                          - 0xf'fff0   0x10
+
+Unused ranges:
+
+      From        To      Size
+      ----        --      ----
+     0x3f0  0x3'fdff  0x3'fa10
+  0xf'9f8f  0xf'fe1f    0x5e91
+  0xf'fe20  0xf'fedf      0xc0
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address   Size
+          -------   ----
+Zero (___iar_zero_init_near2)
+    1 destination range, total size 0xf:
+          0xf'9f80   0xf
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module              ro code  ro data  rw data  rw data
+                                                    (abs)
+    ------              -------  -------  -------  -------
+command line/config:
+    ------------------------------------------------------
+    Total:
+
+E:\ibrahim\Github_ibrahim\Renesas RL78_G14\Renesas-RL78\Input Output\Debug\Obj: [1]
+    r_cg_cgc.o               23                          4
+    r_cg_cgc_user.o           3                          1
+    r_cg_intc.o             108                          9
+    r_cg_intc_user.o         10
+    r_cg_port.o              18                          4
+    r_cg_timer.o             92                         23
+    r_cg_timer_user.o        25                 2
+    r_cg_wdt.o               16                          8
+    r_cg_wdt_user.o           2
+    r_main.o                231       14       13        3
+    r_systeminit.o           39                          3
+    ------------------------------------------------------
+    Total:                  567       14       15       55
+
+dbgrlnnf23nd.a: [2]
+    __dbg_abort.o            10
+    __dbg_break.o             3
+    __dbg_xxexit.o           17
+    ------------------------------------------------------
+    Total:                   30
+
+dlrlnnf23n.a: [3]
+    cexit.o                   5
+    cstartup.o               58
+    data_init.o              65
+    default_handler.o        19
+    exit.o                    3
+    interrupt_vector.o               126
+    near_zero_init.o         37
+    ------------------------------------------------------
+    Total:                  187      126
+
+    Linker created                     8      128
+----------------------------------------------------------
+    Grand Total:            784      148      143       55
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                    Address  Size  Type      Object
+-----                    -------  ----  ----      ------
+.iar.init_table$$Base      0x382         --   Gb  - Linker created -
+.iar.init_table$$Limit     0x38a         --   Gb  - Linker created -
+CSTACK$$Base            0xf'9f00         --   Gb  - Linker created -
+CSTACK$$Limit           0xf'9f80         --   Gb  - Linker created -
+OPT_BYTE$$Base              0xc0         --   Gb  - Linker created -
+OPT_BYTE$$Limit             0xc4         --   Gb  - Linker created -
+Region$$Table$$Base        0x382         --   Gb  - Linker created -
+Region$$Table$$Limit       0x38a         --   Gb  - Linker created -
+SECUR_ID$$Base              0xc4         --   Gb  - Linker created -
+SECUR_ID$$Limit             0xce         --   Gb  - Linker created -
+_NEAR_CONST_LOCATION {Abs}
+                             0x0        Data  Gb  <internal module>
+_R_CGC_Create              0x301  0x17  Code  Gb  r_cg_cgc.o [1]
+_R_CGC_Get_ResetSource     0x377   0x3  Code  Gb  r_cg_cgc_user.o [1]
+_R_INTC8_Start             0x21d   0x7  Code  Gb  r_cg_intc.o [1]
+_R_INTC9_Start             0x224   0x7  Code  Gb  r_cg_intc.o [1]
+_R_INTC_Create             0x1bf  0x5e  Code  Gb  r_cg_intc.o [1]
+_R_MAIN_UserInit           0x112   0xd  Code  Gb  r_main.o [1]
+_R_PORT_Create             0x32b  0x12  Code  Gb  r_cg_port.o [1]
+_R_Systeminit              0x2c1  0x1f  Code  Gb  r_systeminit.o [1]
+_R_TAU0_Channel0_Start     0x27c   0xb  Code  Gb  r_cg_timer.o [1]
+_R_TAU0_Create             0x22b  0x51  Code  Gb  r_cg_timer.o [1]
+_R_WDT_Create              0x34e  0x10  Code  Gb  r_cg_wdt.o [1]
+__A_CKC                 0xf'ffa4   0x1  Data  Gb  r_cg_cgc.o [1]
+__A_CMC                 0xf'ffa0   0x1  Data  Gb  r_cg_cgc.o [1]
+__A_CSC                 0xf'ffa1   0x1  Data  Gb  r_cg_cgc.o [1]
+__A_EGN1                0xf'ff3b   0x1  Data  Gb  r_cg_intc.o [1]
+__A_IAWCTL              0xf'0078   0x1  Data  Gb  r_systeminit.o [1]
+__A_IF0                 0xf'ffe0   0x2  Data  Gb  r_cg_wdt.o [1]
+__A_IF1                 0xf'ffe2   0x2  Data  Gb  r_cg_timer.o [1]
+__A_IF2                 0xf'ffd0   0x2  Data  Gb  r_cg_intc.o [1]
+__A_MK0                 0xf'ffe4   0x2  Data  Gb  r_cg_wdt.o [1]
+__A_MK1                 0xf'ffe6   0x2  Data  Gb  r_cg_timer.o [1]
+__A_MK2                 0xf'ffd4   0x2  Data  Gb  r_cg_intc.o [1]
+__A_OSMC                0xf'00f3   0x1  Data  Gb  r_cg_cgc.o [1]
+__A_P4                  0xf'ff04   0x1  Data  Gb  r_main.o [1]
+__A_P6                  0xf'ff06   0x1  Data  Gb  r_main.o [1]
+__A_P7                  0xf'ff07   0x1  Data  Gb  r_main.o [1]
+__A_PER0                0xf'00f0   0x1  Data  Gb  r_cg_timer.o [1]
+__A_PIOR0               0xf'0077   0x1  Data  Gb  r_systeminit.o [1]
+__A_PIOR1               0xf'0079   0x1  Data  Gb  r_systeminit.o [1]
+__A_PM4                 0xf'ff24   0x1  Data  Gb  r_cg_port.o [1]
+__A_PM6                 0xf'ff26   0x1  Data  Gb  r_cg_port.o [1]
+__A_PM7                 0xf'ff27   0x1  Data  Gb  r_cg_port.o [1]
+__A_PR00                0xf'ffe8   0x2  Data  Gb  r_cg_wdt.o [1]
+__A_PR01                0xf'ffea   0x2  Data  Gb  r_cg_timer.o [1]
+__A_PR02                0xf'ffd8   0x2  Data  Gb  r_cg_intc.o [1]
+__A_PR10                0xf'ffec   0x2  Data  Gb  r_cg_wdt.o [1]
+__A_PR11                0xf'ffee   0x2  Data  Gb  r_cg_timer.o [1]
+__A_PR12                0xf'ffdc   0x2  Data  Gb  r_cg_intc.o [1]
+__A_PU4                 0xf'0034   0x1  Data  Gb  r_cg_port.o [1]
+__A_RESF                0xf'ffa8   0x1  Data  Gb  r_cg_cgc_user.o [1]
+__A_TDR00               0xf'ff18   0x2  Data  Gb  r_cg_timer.o [1]
+__A_TMR00               0xf'0190   0x2  Data  Gb  r_cg_timer.o [1]
+__A_TO0                 0xf'01b8   0x2  Data  Gb  r_cg_timer.o [1]
+__A_TOE0                0xf'01ba   0x2  Data  Gb  r_cg_timer.o [1]
+__A_TPS0                0xf'01b6   0x2  Data  Gb  r_cg_timer.o [1]
+__A_TS0                 0xf'01b2   0x2  Data  Gb  r_cg_timer.o [1]
+__A_TT0                 0xf'01b4   0x2  Data  Gb  r_cg_timer.o [1]
+___DebugBreak              0x37d   0x3  Code  Gb  __dbg_break.o [2]
+___exit                    0x33d  0x11  Code  Gb  __dbg_xxexit.o [2]
+___iar_data_init2          0x38a  0x41  Code  Gb  data_init.o [3]
+___iar_default_interrupt_handler
+                           0x318  0x13  Code  Lc  default_handler.o [3]
+___iar_zero_init_near2     0x3cb  0x25  Code  Gb  near_zero_init.o [3]
+___interrupt_0x04          0x380        Code  Gb  r_cg_wdt_user.o [1]
+___interrupt_0x2C          0x2e8        Code  Gb  r_cg_timer_user.o [1]
+___interrupt_0x4E          0x35e        Code  Gb  r_cg_intc_user.o [1]
+___interrupt_0x50          0x363        Code  Gb  r_cg_intc_user.o [1]
+___low_level_init          0x2e0   0x8  Code  Gb  r_systeminit.o [1]
+__exit                     0x372        Code  Gb  cexit.o [3]
+__iar_exit_end             0x377        Code  Gb  cexit.o [3]
+__iar_program_start        0x287        Code  Gb  cstartup.o [3]
+__link_file_version_2 {Abs}
+                             0x1        Data  Gb  <internal module>
+__program_end              0x2c1        Code  Gb  cstartup.o [3]
+_abort                     0x368   0xa  Code  Gb  __dbg_abort.o [2]
+_blink_led                 0x11f  0x1b  Code  Gb  r_main.o [1]
+_exit                      0x37a   0x3  Code  Gb  exit.o [3]
+_flg                    0xf'9f8a   0x1  Data  Gb  r_main.o [1]
+_flg_blink_1ms          0xf'9f86   0x1  Data  Gb  r_main.o [1]
+_flg_switch1            0xf'9f88   0x1  Data  Gb  r_main.o [1]
+_flg_switch2            0xf'9f89   0x1  Data  Gb  r_main.o [1]
+_flg_time_switch        0xf'9f87   0x1  Data  Gb  r_main.o [1]
+_interrupt_vector_table
+                             0x0        Data  Gb  interrupt_vector.o [3]
+_led_shift_r               0x15b  0x64  Code  Gb  r_main.o [1]
+_main                       0xd8  0x3a  Code  Gb  r_main.o [1]
+_opbyte0                    0xc0   0x1  Data  Gb  r_main.o [1]
+_opbyte1                    0xc1   0x1  Data  Gb  r_main.o [1]
+_opbyte2                    0xc2   0x1  Data  Gb  r_main.o [1]
+_opbyte3                    0xc3   0x1  Data  Gb  r_main.o [1]
+_r_intc8_interrupt         0x35e   0x5  Code  Lc  r_cg_intc_user.o [1]
+_r_intc9_interrupt         0x363   0x5  Code  Lc  r_cg_intc_user.o [1]
+_r_tau0_channel0_interrupt
+                           0x2e8  0x19  Code  Lc  r_cg_timer_user.o [1]
+_r_wdt_interrupt           0x380   0x2  Code  Lc  r_cg_wdt_user.o [1]
+_read_switch               0x13a  0x21  Code  Gb  r_main.o [1]
+_s_state                0xf'9f8b   0x1  Data  Lc  r_main.o [1]
+_secuid                     0xc4   0xa  Data  Gb  r_main.o [1]
+_timer_counter          0xf'9f80   0x2  Data  Gb  r_cg_timer_user.o [1]
+blink_led::blink_counter
+                        0xf'9f82   0x2  Data  Lc  r_main.o [1]
+led_shift_r::counter    0xf'9f84   0x2  Data  Lc  r_main.o [1]
+led_shift_r::index_led  0xf'9f8d   0x1  Data  Lc  r_main.o [1]
+led_shift_r::j          0xf'9f8e   0x1  Data  Lc  r_main.o [1]
+read_switch::cnt_swtch  0xf'9f8c   0x1  Data  Lc  r_main.o [1]
+
+
+[1] = E:\ibrahim\Github_ibrahim\Renesas RL78_G14\Renesas-RL78\Input Output\Debug\Obj
+[2] = dbgrlnnf23nd.a
+[3] = dlrlnnf23n.a
+
+  784 bytes of readonly  code memory
+  148 bytes of readonly  data memory
+  143 bytes of readwrite data memory (+ 55 absolute)
+
+Errors: none
+Warnings: none
