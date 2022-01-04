@@ -13,50 +13,32 @@ In this example I used 3 outputs and 3 inputs with 2 as the external interrupt, 
 4. Renesas E1 programmer 
 
 # How this exampel works 
-- one of the LEDs, LED3 stay blinking each 500ms.
+- One of the LEDs, LED3 stay blinking each 500ms.
 - when switch 3 is pressed, LED2 turns ON otherwise it goes OFF.
 - when switch 1 is pressed, the LED0 and LED1 will blinking and turned OFF.
 
-Renesas(RSKRL78G14) Starter Kit User’s Manual page 17.
+# Example Configuration
+- Renesas(RSKRL78G14) Starter Kit User’s Manual page 17.
+
  ![dev_board_led_switch_pins](images/dev_board_leds_and_switches_pins.png)
 
+ - Applilet configuration
+
+ Input configuration pin (switch3)
+
+![input](images/input_pin_config.png)
+
+Input external interrupt (switch2 and switch1)
+
+![input_interrupt](images/int_input_pins_config.png)
+
+Output configuration
+
+![output](images/output_pins_config.png)
+![output](images/output_pins_config_P6_2_3.png)
+
+Timer configuration
+
+![output](images/timer_config.png)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Executable files built outside of IAR Embedded Workbench
-
-Follow these steps to load and debug an executable file that was built outside
-IAR Embedded Workbench, for example projects built on the command line. 
-
-1. Choose Project>Add Files to add the executable file (filename extension out)
-that you want to debug to the project. 
-
-2. Set up the debugger options according to you needs. The only project options
-that are meaningful to set for this kind of project are options in the General
-Options and Debugger categories. Make sure to set up the general project 
-options in the same way as when the executable file was built.
-
-3. To start the debugger, select the project in the workspace window and
-click the Debug button. The project can be reused whenever you rebuild your
-executable file. The debugger will notice if the executable file has been 
-rebuilt and ask you if you want to reload it.
