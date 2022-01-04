@@ -18,7 +18,7 @@ In this example I used 3 outputs and 3 inputs with 2 as the external interrupt, 
 - when switch 1 is pressed, the LED0 and LED1 will blinking and turned OFF.
 
 Renesas(RSKRL78G14) Starter Kit User’s Manual page 17.
- ![dev_board_led_switch_pins][E:\ibrahim\Github_ibrahim\Renesas RL78_G14\Renesas-RL78\Input Output\images\dev_board_leds_and_switches_pins.png] 
+ ![dev_board_led_switch_pins](images/dev_board_leds_and_switches_pins.png)
 
 
 
